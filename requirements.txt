@@ -13,4 +13,4 @@ youtube-dl2
 discord
 pynacl
 youtube-search-python
-git+https://github.com/mps-youtube/pafy.git
+youtube-dl

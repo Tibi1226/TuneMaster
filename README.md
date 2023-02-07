@@ -1,4 +1,4 @@
 
 # TuneMaster
 
-A music bot written in python
+A  written in python

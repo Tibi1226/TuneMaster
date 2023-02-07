@@ -1,1 +1,2 @@
-web: python main.py && pip install git+https://github.com/mps-youtube/pafy.git
+web: python main.py 
+worker: python main.py && pip install git+https://github.com/mps-youtube/pafy.git

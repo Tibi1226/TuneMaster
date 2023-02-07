@@ -5,6 +5,6 @@ nixPkgs = ["...", "ffmpeg"]
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "nix-env -iA nixpkgs.ffmpeg && pip install git+https://github.com/mps-youtube/pafy.git  && python main.py"
+startCommand = "nix-env -iA nixos.ffmpeg && pip install git+https://github.com/mps-youtube/pafy.git  && python main.py"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3

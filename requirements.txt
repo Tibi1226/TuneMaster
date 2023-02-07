@@ -8,3 +8,9 @@ frozenlist==1.3.3
 idna==3.4
 multidict==6.0.3
 yarl==1.8.2
+pip install ffmpeg
+youtube-dl2
+discord
+pynacl
+youtube-search-python
+git+https://github.com/mps-youtube/pafy.git

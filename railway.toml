@@ -1,0 +1,10 @@
+[phases.setup]
+nixPkgs = ["...", "ffmpeg"] # Install the ffmpeg package from Nix
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "pip install git+https://github.com/mps-youtube/pafy.git  && python main.py"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

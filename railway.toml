@@ -1,7 +1,5 @@
-[phases.setup]
-nixPkgs = ["...", "ffmpeg"] # Install the ffmpeg package from Nix
-
-[build]
+[setup]
+nixPkgs = ["...", "ffmpeg"]
 builder = "NIXPACKS"
 
 [deploy]

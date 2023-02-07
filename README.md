@@ -1,9 +1,4 @@
----
-title: TuneMaster
-description: A Discord bot written in Python
-tags:
-  - python
-  - discord.py
----
 
+# TuneMaster
 
+A music bot written in python

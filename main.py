@@ -127,20 +127,17 @@ async def play(ctx, *, query):
 
 
 
-        try:
-            voice.play(discord.FFmpegOpusAudio(play_url), after = lambda e: playQueue(ctx = ctx, voice = voice))
+        voice.play(discord.FFmpegOpusAudio(play_url), after = lambda e: playQueue(ctx = ctx, voice = voice))
             
-            await ctx.send(f"Playing: {url}")
+        await ctx.send(f"Playing: {url}")
 
-            if len(queue) > 0:
-                await ctx.send(f"Next: {queue[0]}")
+        if len(queue) > 0:
+            await ctx.send(f"Next: {queue[0]}")
 
-            history = open(str(ctx.guild.id), 'a')
-            history.write(url + datetime.now().strftime(" %Y.%m.%d - %H:%M") + f", Requested by: {ctx.author.name}\n")
-            history.close()
+        history = open(str(ctx.guild.id), 'a')
+        history.write(url + datetime.now().strftime(" %Y.%m.%d - %H:%M") + f", Requested by: {ctx.author.name}\n")
+        history.close()
 
-        except ClientException:
-            await ctx.send(f"Some error happened (line 101)")
 
 
 

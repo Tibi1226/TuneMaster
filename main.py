@@ -236,8 +236,8 @@ async def clearqueue(ctx, entry = "all"):
         await ctx.send("Queue cleared")
 
     else:
-        queue.pop(int(entry) - 1)
         temp = str(queue[int(entry) - 1])
+        queue.pop(int(entry) - 1)
         await ctx.send(f"Removed {temp} from queue.")
 
 @client.command()

@@ -251,4 +251,3 @@ async def showqueue(ctx):
 
 
 client.run(os.environ["DISCORD_TOKEN"])
-#client.run('MTAwNDM1MzA4MzgwNTAxMTk5OA.GS-3rl.z2ng4mH0cjl2uv2G41nBG3PonsM3XYJAZOhqBM')

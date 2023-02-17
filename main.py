@@ -9,7 +9,8 @@ from discord.ext import commands
 from discord.errors import *
 from discord.ext.commands.errors import *
 from youtubesearchpython import Search
-from pafy import new
+import json
+import yt_dlp
 from datetime import datetime
 
 
@@ -59,10 +60,11 @@ async def play(ctx, *, query):
             print(f"Found the following url: {url}")
 
             # Gets the highest bitrate audio stream with pafy
-            video = new(url)
-            audio = video.getbestaudio()
-            play_url = audio.url
-            print("Url playing: " + play_url)
+            ydl_opts = {'format': 'm4a/bestaudio/best'}
+            play_url = None
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(url, download=False)
+                play_url = ydl.sanitize_info(info)["url"]
 
             try:
                 voice.play(discord.FFmpegOpusAudio(play_url), after = lambda e: playQueue(ctx = ctx, voice = voice))
@@ -120,10 +122,11 @@ async def play(ctx, *, query):
         print(f"Found the following url: {url}")
 
         # Gets the highest bitrate audio stream with pafy
-        video = new(url)
-        audio = video.getbestaudio()
-        play_url = audio.url
-        print("Url playing: " + play_url)
+        ydl_opts = {'format': 'm4a/bestaudio/best'}
+        play_url = None
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+            play_url = ydl.sanitize_info(info)["url"]
 
 
 

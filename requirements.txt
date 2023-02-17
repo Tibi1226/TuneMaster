@@ -12,4 +12,4 @@ ffmpeg
 discord
 pynacl
 youtube-search-python
-yt-dlp
+

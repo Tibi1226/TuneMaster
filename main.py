@@ -206,7 +206,7 @@ async def stop(ctx):
         await ctx.message.add_reaction("\N{Black Square for Stop}")
 
     except AttributeError:
-        await ctx.send("No music is :)) playing.")
+        await ctx.send("No music is playing.")
 
 
 @client.command()

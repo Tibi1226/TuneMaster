@@ -111,6 +111,7 @@ async def play(ctx, *, query):
     voice = discord.utils.get(client.voice_clients, guild = ctx.guild)
 
     if voice.is_playing():
+        print("voice is playing")
         queue.append(query)
         await ctx.send(f"Queued {query}")
 

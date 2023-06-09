@@ -12,3 +12,7 @@
 ## Usage
 - To start the bot, just simply start [main.py](main.py).
 - To emphasise, ***This is not working!***
+
+## Useful resources
+- [Discord API documentation](https://discordpy.readthedocs.io/en/stable/)
+- [Discord Developer Portal](https://discord.com/developers)

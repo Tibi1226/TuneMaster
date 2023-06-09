@@ -6,4 +6,4 @@
 **Not working!!**
 
 ## Requiements
-- The modules requied for this bot are listed in the [[requiements.txt]]
+- The modules requied for this bot are listed in the [requiements.txt](requiements.txt).

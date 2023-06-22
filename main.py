@@ -42,101 +42,47 @@ async def hello(ctx):
 
 
 @client.command()
-async def play(ctx, *, query): 
-
-    def playQueue(ctx, voice):
-
-        print("almaaaa")
-
-        if len(queue) == 0:
-            pass
-
-        else:
-
-            # Searches for query on YouTube
-            print(f"Searching for: {queue[0]}")
-            search = Search(queue[0], limit = 1)
-            url = "https://www.youtube.com/watch?v=" + search.result()['result'][0]["id"]
-            print(f"Found the following url: {url}")
-
-            # Gets the highest bitrate audio stream with pafy
-            ydl_opts = {'format': 'm4a/bestaudio/best'}
-            play_url = None
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                info = ydl.extract_info(url, download=False)
-                play_url = ydl.sanitize_info(info)["url"]
-
-            try:
-                voice.play(discord.FFmpegOpusAudio(play_url), after = lambda e: playQueue(ctx = ctx, voice = voice))
-
-                queue.pop(0)
-                
-                coro = ctx.send(f"Playing from **queue**: {url}")
-                fut = asyncio.run_coroutine_threadsafe(coro, client.loop)
-
-                try:
-                    fut.result()
-                except:
-                    # an error happened sending the message
-                    pass
-
-                if len(queue) > 0:
-                    coro = ctx.send(f"Next: {queue[0]}")
-                    fut = asyncio.run_coroutine_threadsafe(coro, client.loop)
-
-                    try:
-                        fut.result()
-
-                    except:
-                        pass
-
-
-                history = open(str(ctx.guild.id), 'a')
-                history.write(url + datetime.now().strftime(" %Y.%m.%d - %H:%M") + f", Requested by: {ctx.author.name}\n")
-                history.close()
-
-            except ClientException:
-                pass
-
-
+async def play(ctx, *, query):
     # Connects to a voice channel
-    voice_channel = discord.utils.get(ctx.guild.voice_channels, name = ctx.guild.voice_channels[0].name)
+    voice_channel = ctx.guild.voice_channels[0]
+    print(voice_channel)
 
     try:
         await voice_channel.connect()
+    except ClientException:
+        await ctx.send("Alreasdy idk")
 
-    except:
-        pass
-
+    print("2")
+    if len(client.voice_clients) == 0:
+        await ctx.send("fail")
     voice = discord.utils.get(client.voice_clients, guild = ctx.guild)
+    print("3")
+    print(voice)
+    if voice.is_connected():
+        await ctx.send("Connected")
+        print("Connected")
+    else:
+        await ctx.send("Not connected")
+        print("Not connected")
 
     if voice.is_playing():
         print("voice is playing")
-        queue.append(query)
-        await ctx.send(f"Queued {query}")
+        await ctx.send("Something else is already playing ")
 
     else:
-        # Searches for query on YouTube
-        print(f"Searching for: {query}")
-        search = Search(query, limit = 1)
-        url = "https://www.youtube.com/watch?v=" + search.result()['result'][0]["id"]
-        print(f"Found the following url: {url}")
-
-        # Gets the highest bitrate audio stream with pafy
-        ydl_opts = {'format': 'm4a/bestaudio/best'}
+        ydl_opts = {'format':'m4a/bestaudio/best'}
         play_url = None
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
+            info = ydl.extract_info(f"ytsearch:{query}", download=False)['entries'][0]
             play_url = ydl.sanitize_info(info)["url"]
+            url = "https://www.youtube.com/watch?v=" + str(ydl.sanitize_info(info)["id"])
 
 
-
-        voice.play(discord.FFmpegOpusAudio(play_url), after = lambda e: playQueue(ctx = ctx, voice = voice))
+        print(voice)
+        voice.play(discord.FFmpegOpusAudio(play_url))
             
         await ctx.send(f"Playing: {url}")
 
-        if len(queue) > 0:
-            await ctx.send(f"Next: {queue[0]}")
 
         history = open(str(ctx.guild.id), 'a')
         history.write(url + datetime.now().strftime(" %Y.%m.%d - %H:%M") + f", Requested by: {ctx.author.name}\n")

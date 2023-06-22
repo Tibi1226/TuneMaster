@@ -1,7 +1,7 @@
 
 # TuneMaster
 [https://tunemaster.webnode.page/](https://tunemaster.webnode.page/ "The project's webpage")
-> A Discord music bot written in python
+> A Discord bot written in python
 
 **Not working!!**
 

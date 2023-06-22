@@ -12,3 +12,4 @@ discord
 pynacl
 youtube-search-python
 yt_dlp
+asyncio

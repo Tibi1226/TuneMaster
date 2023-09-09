@@ -1,14 +1,4 @@
-aiohttp
-aiosignal
-async-timeout
-attrs
-charset-normalizer
 discord.py
-frozenlist
-idna
-multidict
-yarl
-discord
 pynacl
 youtube-search-python
 yt_dlp
